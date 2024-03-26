@@ -1,3 +1,5 @@
+-- CRIAR TABELA
+
 CREATE TABLE produtos (
     id_produto INTEGER PRIMARY KEY,
     nome TEXT NOT NULL,
@@ -8,6 +10,8 @@ CREATE TABLE produtos (
     nacionalidade TEXT
 );
 
+-- POPULAR TABELA
+
 INSERT INTO produtos (nome, preco, estoque, perecivel, marca, nacionalidade)VALUES
 ('feijao', 5.99, 20, 0, 'feijaozinho', 'Brasil'),
 ('arroz', 3.40, 50, 0, 'arrozinho', 'Brasil'),
@@ -16,35 +20,33 @@ INSERT INTO produtos (nome, preco, estoque, perecivel, marca, nacionalidade)VALU
 ('queijo', 20.99, 8, 1, 'queijinho', 'Italiano');
 
 
+-- SELECTS
+SELECT COUNT (*) AS total_produtos FROM produtos;
 
-1. SELECT COUNT (*) AS total_produtos FROM produtos;
+SELECT AVG(preco) AS preco_medio FROM produtos;
 
-2. SELECT AVG(preco) AS preco_medio FROM produtos;
-
-3. SELECT perecivel, AVG(preco) AS preco_medio
+SELECT perecivel, AVG(preco) AS preco_medio
 FROM produtos
 GROUP BY perecivel;
 
-4. SELECT nome, AVG(preco) AS preco_medio
+SELECT nome, AVG(preco) AS preco_medio
 FROM produtos
 GROUP BY nome;
 
-5. SELECT AVG(preco) AS preco_medio, SUM(estoque) AS total_estoque
+SELECT AVG(preco) AS preco_medio, SUM(estoque) AS total_estoque
 FROM produtos;
 
-6. SELECT p.nome, p.marca, p.estoque
+SELECT p.nome, p.marca, p.estoque
 FROM produtos p
 INNER JOIN (
     SELECT MAX(preco) AS max_preco
     FROM produtos
 ) max_price ON p.preco = max_price.max_preco;
 
-7. SELECT *
+SELECT *
 FROM produtos
 WHERE preco > (SELECT AVG(preco) FROM produtos);
 
-8. SELECT nacionalidade, COUNT(*) AS quantidade
+SELECT nacionalidade, COUNT(*) AS quantidade
 FROM produtos
 GROUP BY nacionalidade;
-
-9
